@@ -11,3 +11,5 @@ $client->addService('catalogCategoryRepositoryV1');
 $client->catalogProductRepositoryV1Get(['sku' => '24-UB02']);
 $client->catalogCategoryRepositoryV1Get(['categoryId' => 3]);
 
+
+
