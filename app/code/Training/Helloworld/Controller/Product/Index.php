@@ -65,7 +65,9 @@ class Index extends \Magento\Framework\App\Action\Action
             return null;
         }
 // get the product
-        $product = $this->productFactory->create()->load($id);
+        $product = $this->productFactory->create();
+        $product->getResource()->load($product, $id);
+        
         if (!$product->getId()) {
             return null;
         }
