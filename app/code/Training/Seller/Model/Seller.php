@@ -13,11 +13,12 @@ use Training\Seller\Api\Data\SellerInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 
 
+
 /**
  * Class Seller
  * @package Training\Seller\Model
  */
-class Seller extends AbstractModel implements SellerInterface, IdentifyInterface
+class Seller extends AbstractModel implements SellerInterface, IdentityInterface
 {
 
     /**
