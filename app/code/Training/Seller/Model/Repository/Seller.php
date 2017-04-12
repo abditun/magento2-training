@@ -1,42 +1,41 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: formation
- * Date: 12/04/17
- * Time: 11:44
+ * Magento 2 Training Project
+ * Module Training/Seller
  */
-
 namespace Training\Seller\Model\Repository;
 
-
-use Training\Seller\Api\Data\SellerInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Training\Seller\Api\SellerRepositoryInterface;
-use Training\Seller\Model\Repository\AbstractRepository;
-
+use Training\Seller\Api\Data\SellerSearchResultsInterfaceFactory;
+use Training\Seller\Api\Data\SellerInterface;
+use Training\Seller\Model\SellerFactory;
+use Training\Seller\Model\ResourceModel\Seller as SellerResourceModel;
 
 /**
- * Class Seller
- * @package Training\Seller\Model\Repository
+ * Seller Repository
+ *
+ * @author    Laurent MINGUET <lamin@smile.fr>
+ * @copyright 2016 Smile
  */
 class Seller extends AbstractRepository implements SellerRepositoryInterface
 {
-
     /**
-     * Seller constructor.
-     * @param \Magento\Framework\Model\AbstractModelFactory $objectFactory
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $objectResource
-     * @param \Magento\Framework\Api\SearchResultsFactory $searchResultsFactory
+     * PHP Constructor
+     *
+     * @param SellerFactory                       $objectFactory
+     * @param SellerResourceModel                 $objectResource
+     * @param SellerSearchResultsInterfaceFactory $searchResultsFactory
      */
-    public function __construct(\Magento\Framework\Model\AbstractModelFactory $objectFactory,
-                                \Magento\Framework\Model\ResourceModel\Db\AbstractDb $objectResource,
-                                \Magento\Framework\Api\SearchResultsFactory $searchResultsFactory
-    )
-    {
+    public function __construct(
+        SellerFactory                       $objectFactory,
+        SellerResourceModel                 $objectResource,
+        SellerSearchResultsInterfaceFactory $searchResultsFactory
+    ) {
         parent::__construct($objectFactory, $objectResource, $searchResultsFactory);
 
-        $this->setIdentifierFieldName(SellerInterface::FIELD_NAME);
+        $this->setIdentifierFieldName(SellerInterface::FIELD_IDENTIFIER);
     }
-
 
     /**
      * @inheritdoc
@@ -85,5 +84,4 @@ class Seller extends AbstractRepository implements SellerRepositoryInterface
     {
         return $this->deleteEntity($this->getEntityByIdentifier($objectIdentifier));
     }
-    
 }
