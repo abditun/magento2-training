@@ -132,4 +132,25 @@ class Seller extends AbstractModel implements SellerInterface, IdentityInterface
     }
 
 
+    /**
+     * @inheritdoc
+     */
+    public function setDescription($value)
+    {
+        if (!is_null($value)) {
+            $value = (string) $value;
+        }
+
+        return $this->setData(self::FIELD_DESCRIPTION, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDescription()
+    {
+        return $this->getData(self::FIELD_DESCRIPTION);
+    }
+
+
 }
