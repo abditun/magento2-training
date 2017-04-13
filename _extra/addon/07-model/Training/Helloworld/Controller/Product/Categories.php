@@ -56,7 +56,7 @@ class Categories extends \Magento\Framework\App\Action\Action
             ->load();
 
         $categoryIds = array();
-        foreach ($productCollection as $product) {
+        foreach ($productCollection->getItems() as $product) {
             /** @var \Magento\Catalog\Model\Product $product */
             $categoryIds = array_merge($categoryIds, $product->getCategoryIds());
         }
@@ -70,7 +70,7 @@ class Categories extends \Magento\Framework\App\Action\Action
             ->load();
 
         $html = '<ul>';
-        foreach ($productCollection as $product) {
+        foreach ($productCollection->getItems() as $product) {
             $html.= '<li>';
             $html.= $product->getId().' => '.$product->getSku().' => '.$product->getName();
             $html.= '<ul>';

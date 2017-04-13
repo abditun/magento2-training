@@ -46,23 +46,22 @@ class Index extends AbstractBlock
      */
     public function getSearchName()
     {
-        $name = '';
+        $default = '';
 
         $searchCriteria = $this->getSearchResult()->getSearchCriteria();
         if (is_null($searchCriteria)) {
-            return $name;
+            return $default;
         }
 
-        $filterGroups = $searchCriteria->getFilterGroups();
-        if (count($filterGroups) == 1) {
-            $filters = $filterGroups[0]->getFilters();
-
-            if (count($filters) == 1) {
-                $name = str_replace('%', '', $filters[0]->getValue());
+        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
+            foreach ($filterGroup->getFilters() as $filter) {
+                if ($filter->getField() === 'name') {
+                    return str_replace('%', '', $filter->getValue());
+                }
             }
         }
 
-        return $name;
+        return $default;
     }
 
     /**
@@ -72,18 +71,19 @@ class Index extends AbstractBlock
      */
     public function getSortOrder()
     {
-        $order = SortOrder::SORT_ASC;
+        $default = SortOrder::SORT_ASC;
 
         $searchCriteria = $this->getSearchResult()->getSearchCriteria();
         if (is_null($searchCriteria)) {
-            return $order;
+            return $default;
         }
 
-        $sortOrders = $searchCriteria->getSortOrders();
-        if (count($sortOrders) == 1) {
-            $order = $sortOrders[0]->getDirection();
+        foreach ($searchCriteria->getSortOrders() as $sortOrder) {
+            if ($sortOrder->getField() === 'name') {
+                return $sortOrder->getDirection();
+            }
         }
 
-        return $order;
+        return $default;
     }
 }
